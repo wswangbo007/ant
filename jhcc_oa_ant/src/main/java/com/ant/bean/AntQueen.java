@@ -3,6 +3,7 @@ package com.ant.bean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
  * 蚂蚁皇后
@@ -16,6 +17,11 @@ public class AntQueen extends Ant implements Runnable {
 	public AntQueen() {};
 	
 	public AntQueen(int antCount) {
+		this.antCount = antCount;
+	}
+	
+	public AntQueen(int antCount,ExecutorService executorService) {
+		super(executorService);
 		this.antCount = antCount;
 	}
 	
@@ -41,7 +47,7 @@ public class AntQueen extends Ant implements Runnable {
 		List<Ant> ants = new ArrayList<Ant>(count);
 		if (count > 0) {
 			for (int index = 1; index <= count; index++) {
-				ants.add(new AntWork());
+				ants.add(new AntWork(executorService));
 			}
 		} else {
 			throw new NullPointerException("干嘛?,神经病啊!");
@@ -66,6 +72,7 @@ public class AntQueen extends Ant implements Runnable {
 		try {
 			for (;;) {
 				if (this.food.isFindFood()) {
+					this.condition.signal();
 					System.out.println("蚂蚁皇后  eat food!");
 					// TODO 蚂蚁皇后吃食物
 				} else {

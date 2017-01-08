@@ -4,8 +4,6 @@ package com.ant.util;
  * 字符串
   * @ClassName: StringsUtils
   * @author 神经刀
-  * @date 2017年1月1日 下午10:07:21
-  *
  */
 public class StringsUtils {
 	

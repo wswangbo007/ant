@@ -1,6 +1,7 @@
 package com.ant.bean;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import com.ant.food.Food;
 import com.ant.food.FoodInter;
@@ -18,14 +19,24 @@ public class AntTaskMaster extends AbstAntTaskMaster {
 		super(food, cave);
 	}
 	
+	public AntTaskMaster(FoodInter<?> food, Cave cave,ExecutorService executorService) {
+		super(food, cave);
+		this.executorService = executorService;
+	}
+	
 	public AntTaskMaster(FoodInter<?> food, Cave cave,List<Ant> antWorks) {
 		super(food, cave, antWorks);
+	}
+	
+	public AntTaskMaster(FoodInter<?> food, Cave cave,List<Ant> antWorks,ExecutorService executorService) {
+		super(food, cave, antWorks);
+		this.executorService = executorService;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void planAntTask() {
-		List<Integer> andFood = null;
+		List<Integer> antFood = null;
 		AntWork antWork = null;
 		List<Integer> foodList = (List<Integer>) food.getFood();
 		if (null != foodList && !foodList.isEmpty()) {
@@ -34,15 +45,14 @@ public class AntTaskMaster extends AbstAntTaskMaster {
 				int limit = size / dataLimit;
 				for (int i = 0,count = limit; i < count; i++) {
 					try {
-						andFood = foodList.subList(0, dataLimit);
+						antFood = foodList.subList(0, dataLimit);
+						foodList.subList(0, dataLimit).clear();
 						antWork = (AntWork) super.getAntWork(i);
-						antWork.setCave(cave);
-						antWork.setFood(((Food)food).setFood(andFood));
-						antWork.exec();
+						antWork.setFood(((Food)food).setFood(antFood));
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						foodList.subList(0, dataLimit).clear();
+						antWork.exec();
 					}
 				}
 			}

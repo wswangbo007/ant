@@ -14,8 +14,8 @@ import java.util.TreeMap;
 public class AntMap extends TreeMap<Integer, Integer> implements IMap<Integer> {
 	
 	private static final long serialVersionUID = 1L;
-
-	public AntMap() {super();}
+	
+	public AntMap() {super();};
 	
 	public AntMap(Comparator<? super Integer> comparator) {
 		super(comparator);
@@ -30,7 +30,7 @@ public class AntMap extends TreeMap<Integer, Integer> implements IMap<Integer> {
 				if (this.containsKey(index)) {
 					this.put(index, 1 + this.get(index));
 				} else {
-					this.put(index, 0);	
+					this.put(index, 0);
 				}
 			}
 		}
@@ -38,13 +38,13 @@ public class AntMap extends TreeMap<Integer, Integer> implements IMap<Integer> {
 	}
 
 	@Override
-	public Map<Integer, Integer> getMapData(IMapParams<Integer> iMapParams) {
-		int size = iMapParams.getSize(),index = 0;
+	public Map<Integer, Integer> getMapData() {
+		int index = 0;
 		Map<Integer,Integer> map = null;
-		if (null != this && !this.isEmpty() && size > 0) {
+		if (null != this && !this.isEmpty() && this.size() > 0) {
 			map = new HashMap<Integer,Integer>();
 			for (java.util.Map.Entry<Integer, Integer> entry : this.entrySet()) {
-				if (index >= size) break;
+				if (index >= this.size()) break;
 				index++;
 				map.put(entry.getKey(), entry.getValue());
 			}

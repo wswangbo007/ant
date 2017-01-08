@@ -1,5 +1,7 @@
 package com.ant.bean;
 
+import java.util.concurrent.ExecutorService;
+
 import com.ant.food.FoodInter;
 
 /**
@@ -21,5 +23,9 @@ public class AntWork extends AbstractAntWork {
 
 	public AntWork(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
+	}
+	
+	public AntWork(ExecutorService executorService) {
+		super(executorService);
 	}
 }

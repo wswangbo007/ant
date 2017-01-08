@@ -1,6 +1,8 @@
 package com.ant.work;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.ant.bean.Ant;
 import com.ant.bean.AntQueen;
@@ -16,7 +18,11 @@ import com.ant.food.Food;
  */
 public class WorkRun implements Runnable {
 	
+	protected final int antCount = 20;
+	
 	private AbstractDataOperation<Integer> dataOperation;
+	
+	private ExecutorService executorService = Executors.newFixedThreadPool(antCount);
 	
 	// 蚂蚁皇后
 	private AntQueen antQueen;
@@ -29,17 +35,18 @@ public class WorkRun implements Runnable {
 	
 	public WorkRun() {
 		this.dataOperation = new DataOperationImpl();
-		this.antQueen = new AntQueen();
+		this.antQueen = new AntQueen(antCount,executorService);
 		Food food = new Food(dataOperation);
-		this.antWorks = antQueen.getAnts(5);
-		this.antTaskMaster = new AntTaskMaster(food, new Cave(antWorks));
-		antTaskMaster.exec();
-//		antQueen.setFood(food);
-//		antWorks.add(antQueen);
+		this.antWorks = antQueen.getAnts();
+		this.antTaskMaster = new AntTaskMaster(food, new Cave(antWorks),executorService);
+		antQueen.setFood(food);
+		antWorks.add(antQueen);
 	}
 
 	@Override
 	public void run() {
+		antTaskMaster.exec();
+		antQueen.exec();
 		// TODO 初始化蚂蚁工人
 		// 生成食物.
 		// 蚂蚁寻找食物

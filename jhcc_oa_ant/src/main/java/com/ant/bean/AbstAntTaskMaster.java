@@ -60,15 +60,15 @@ public abstract class AbstAntTaskMaster extends Ant implements Runnable {
 	protected Ant getAntWork(int index) {
 		List<Ant> ants = cave.getAnts();
 		AntWork antWork = null;
-		if (index >= 0 || (null != ants && !ants.isEmpty())) {
-			throw new NullPointerException("洞穴中没有蚂蚁或者不知道你要找哪一只蚂蚁工人!");
-		} else {
+		if (index > -1 || (null != ants && !ants.isEmpty())) {
 			if (index > ants.size()) {
-				antWork = new AntWork();
+				antWork = new AntWork(executorService);
 				antWork.setCave(this.cave);
 			} else {
 				antWork = (AntWork) this.cave.getAnts().get(index);
 			}
+		} else {
+			throw new NullPointerException("洞穴中没有蚂蚁或者不知道你要找哪一只蚂蚁工人!");
 		}
 		return antWork;
 	}

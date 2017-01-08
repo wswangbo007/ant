@@ -2,7 +2,6 @@ package com.ant.bean;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -17,9 +16,7 @@ import com.ant.work.IAntWrok;
  */
 public abstract class Ant implements IAntWrok {
 	
-	protected final int antCount = 5;
-	
-	protected ExecutorService executorService = Executors.newFixedThreadPool(antCount);
+	protected ExecutorService executorService;
 
 	protected FoodInter<?> food;
 	
@@ -33,6 +30,11 @@ public abstract class Ant implements IAntWrok {
 	
 	public Ant() {
 		super();
+	}
+	
+	public Ant(ExecutorService executorService) {
+		super();
+		this.executorService = executorService;
 	}
 	
 	public Ant(FoodInter<?> food,Cave cave) {
@@ -68,5 +70,13 @@ public abstract class Ant implements IAntWrok {
 
 	public void setCave(Cave cave) {
 		this.cave = cave;
+	}
+
+	public ExecutorService getExecutorService() {
+		return executorService;
+	}
+
+	public void setExecutorService(ExecutorService executorService) {
+		this.executorService = executorService;
 	}
 }

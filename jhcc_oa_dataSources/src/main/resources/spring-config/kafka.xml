@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="kafkaConfig" class="com.datasource.config.KafkaConfig">
+		<property name="paramsMap">
+			<map>
+                <entry key="bootstrap.servers" value="192.168.1.110:9092,192.168.1.111:9092,192.168.1.112:9092" />
+                <entry key="acks" value="all" />
+                <entry key="retries" value="0" />
+                <entry key="batch.size" value="16384" />
+                <entry key="linger.ms" value="1" />
+                <entry key="buffer.memory" value="33554432" />
+                <entry key="key.serializer" value="org.apache.kafka.common.serialization.StringSerializer" />
+                <entry key="value.serializer" value="org.apache.kafka.common.serialization.StringSerializer" />
+            </map>
+		</property>
+	</bean>
+</beans>

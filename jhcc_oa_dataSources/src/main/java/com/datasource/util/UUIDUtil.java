@@ -2,8 +2,6 @@ package com.datasource.util;
 
 import java.util.UUID;
 
-import org.junit.Test;
-
 /** 
  * ClassName:UUIDUtil <br/> 
  * Function: TODO ADD FUNCTION. <br/> 

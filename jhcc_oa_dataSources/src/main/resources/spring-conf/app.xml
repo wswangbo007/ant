@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="configProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:system-conf/kafka.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="log4jinit" class="com.data.log.LoggerInit">
+		<property name="locations">
+			<list>
+				<value>classpath:system-conf/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<import resource="classpath:spring-conf/dubbo.xml" />
+
+	<import resource="classpath:spring-conf/kafka.xml" />
+
+	<bean id="dataInitServer" class="com.data.sources.init.impl.DataInitServerImpl"
+		init-method="initData">
+		<property name="produceDataService" ref="produceDataService"></property>
+	</bean>
+
+	<bean id="produceDataService" class="com.data.sources.impl.ProduceDataServiceImpl">
+		<property name="mqSendService" ref="mqSendService"></property>
+	</bean>
+
+	<bean id="mqSendService" class="com.data.send.impl.MqSendServiceImpl">
+		<property name="mqSend" ref="kafkaMq"></property>
+	</bean>
+
+</beans>

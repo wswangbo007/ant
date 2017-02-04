@@ -18,6 +18,14 @@ public class KafkaConfig extends AbstractMqConfig {
 	
 	/**配置*/
 	protected Map<String,Object> kafkaConfigMap;
+	
+	public KafkaConfig(KafkaProperties kafkaProperties) {
+		this.kafkaProperties = kafkaProperties;
+	}
+	
+	public KafkaConfig(Map<String,Object> kafkaConfigMap) {
+		this.kafkaConfigMap = kafkaConfigMap;
+	}
 
 	public Map<String, Object> getKafkaConfigMap() {
 		return kafkaConfigMap;

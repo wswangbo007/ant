@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="kafkaMq" class="com.mq.activemq.send.ActiveMqObjectSend">
+		
+	</bean>
+	
+	<bean id="mqConfig" class="com.mq.config.KafkaConfig">
+		<property name="kafkaConfigMap">
+			<map>
+				<entry key="zookeeper.connect" value="${zookeeper.connect}"></entry>
+				<entry key="acks" value="${acks}"></entry>
+				<entry key="retries" value="${retries}"></entry>
+				<entry key="batch.size" value="${batch.size}"></entry>
+				<entry key="linger.ms" value="${linger.ms}"></entry>
+				<entry key="buffer.memory" value="${buffer.memory}"></entry>
+				<entry key="key.serializer" value="${key.serializer}"></entry>
+				<entry key="value.serializer" value="${value.serializer}"></entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

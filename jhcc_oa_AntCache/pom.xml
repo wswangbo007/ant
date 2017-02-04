@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>jhcc_oa_system.parent</groupId>
-		<artifactId>jhcc_oa_parent</artifactId>
+		<artifactId>jhcc_oa_app</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>jhcc_oa_AntCache</artifactId>

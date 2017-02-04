@@ -1,4 +1,5 @@
 /jhcc_oa_ant/target
 /jhcc_oa_AntCache/target
 /jhcc_oa_route/target
-/jhcc_oa_dataSources/target
+/jhcc_oa_mq/target
+/jhcc_oa_bean/target
